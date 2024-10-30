@@ -1,6 +1,10 @@
 package com.example.bookYourSeat.reservation.contorller.dto
 
-import com.example.book_your_seat.payment.PaymentConst.*
+import com.example.bookYourSeat.payment.PaymentConst.ENTER_ADDRESS_ID
+import com.example.bookYourSeat.payment.PaymentConst.ENTER_AMOUNT
+import com.example.bookYourSeat.payment.PaymentConst.ENTER_ORDER_ID
+import com.example.bookYourSeat.payment.PaymentConst.ENTER_PAYMENTKEY
+import com.example.bookYourSeat.payment.PaymentConst.ENTER_SEAT_ID
 import jakarta.validation.constraints.NotNull
 
 data class PaymentRequest(

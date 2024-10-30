@@ -1,6 +1,9 @@
 package com.example.bookYourSeat.reservation.domain
 
-import com.example.book_your_seat.payment.domain.Payment
+import Seat
+import com.example.bookYourSeat.payment.domain.Payment
+import com.example.bookYourSeat.user.domain.Address
+import com.example.bookYourSeat.user.domain.User
 import jakarta.persistence.*
 
 @Entity
