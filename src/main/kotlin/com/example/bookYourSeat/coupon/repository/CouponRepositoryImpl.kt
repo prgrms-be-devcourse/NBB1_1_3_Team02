@@ -1,8 +1,8 @@
 package com.example.bookYourSeat.coupon.repository
 
+import UserCouponResponse
 import com.example.bookYourSeat.coupon.controller.dto.QUserCouponResponse
 import com.example.bookYourSeat.coupon.controller.dto.UserCouponRequest
-import com.example.bookYourSeat.coupon.controller.dto.UserCouponResponse
 import com.example.bookYourSeat.coupon.domain.QCoupon.coupon
 import com.example.bookYourSeat.coupon.domain.QUserCoupon.userCoupon
 import com.example.bookYourSeat.user.domain.QUser.user

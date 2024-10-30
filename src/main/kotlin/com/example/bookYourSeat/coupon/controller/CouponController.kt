@@ -1,10 +1,12 @@
 package com.example.bookYourSeat.coupon.controller
 
 import UserCouponResponse
+import com.example.bookYourSeat.config.security.auth.LoginUser
 import com.example.bookYourSeat.coupon.controller.dto.UserCouponIdResponse
 import com.example.bookYourSeat.coupon.controller.dto.UserCouponRequest
 import com.example.bookYourSeat.coupon.facade.CouponCommandService
 import com.example.bookYourSeat.coupon.facade.UserCouponService
+import com.example.bookYourSeat.user.domain.User
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.http.HttpStatus
