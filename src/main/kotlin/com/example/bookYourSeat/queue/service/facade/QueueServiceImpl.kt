@@ -12,20 +12,20 @@ class QueueServiceImpl(
     private val queueQueryService: QueueQueryService
 ) : QueueService {
 
-    override fun issueTokenAndEnqueue(userId: Long?): TokenResponse? {
+    override fun issueTokenAndEnqueue(userId: Long): TokenResponse {
         return TokenResponse(queueCommandService.issueTokenAndEnqueue(userId))
     }
 
-    override fun dequeueWaitingQueue(userId: Long?, token: String?) {
+    override fun dequeueWaitingQueue(userId: Long, token: String) {
         queueCommandService.removeTokenInWaitingQueue(userId, token)
     }
 
-    override fun dequeueProcessingQueue(userId: Long?, token: String?) {
+    override fun dequeueProcessingQueue(userId: Long, token: String) {
         queueCommandService.removeTokenInProcessingQueue(userId, token)
     }
 
 
-    override fun findQueueStatus(userId: Long?, token: String?): QueueResponse {
+    override fun findQueueStatus(userId: Long, token: String): QueueResponse {
         return queueQueryService.findQueueStatus(userId, token)
     }
 

@@ -1,5 +1,6 @@
 package com.example.bookYourSeat.coupon.domain
 
+import com.example.bookYourSeat.common.entity.BaseEntity
 import jakarta.persistence.*
 import java.time.LocalDate
 
@@ -12,6 +13,7 @@ class Coupon(
 
     val expirationDate: LocalDate
 ) : BaseEntity() {
+    constructor() : this(0, DiscountRate.TEN, LocalDate.now())
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.example.bookYourSeat.config.security.jwt
 
+import com.example.bookYourSeat.common.util.JwtConst.UNSUPPORTED_JWT
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
@@ -30,7 +31,7 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
 
         //token 검증이 완료된 경우에만 authentication을 부여
         if (securityJwtUtil!!.validateToken(jwt)) {
-            log.info("jwt :$jwt")
+//            log.info("jwt :$jwt")
             val authentication = securityJwtUtil.getAuthentication(jwt)
             SecurityContextHolder.getContext().authentication = authentication
         }

@@ -33,7 +33,7 @@ open class UserFacadeImpl(
     override fun deleteAddress(userId: Long, addressId: Long): AddressIdResponse {
         val address = addressQueryService.getAddressWithUser(addressId)
 
-        require(userId == address.user.id) { UserConst.ADDRESS_NOT_OWNED }
+        require(userId == address.user!!.id) { UserConst.ADDRESS_NOT_OWNED }
 
         return addressCommandService.deleteAddress(addressId)
     }

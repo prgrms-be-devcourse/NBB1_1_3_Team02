@@ -8,11 +8,13 @@ import jakarta.persistence.*
 
 @Entity
 class Reservation(
-    @field:Enumerated(EnumType.STRING) val status: ReservationStatus,
-    user: User,
-    address: Address,
-    payment: Payment
+    @field:Enumerated(EnumType.STRING) val status: ReservationStatus? = null,
+    user: User? = null,
+    address: Address? = null,
+    payment: Payment? = null
 ) {
+    constructor() : this(null, null, null)
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
@@ -20,23 +22,23 @@ class Reservation(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private val user: User = user
+    private val user: User? = user
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
-    private val address: Address = address
+    private val address: Address? = address
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id")
-    private val payment: Payment = payment
+    private val payment: Payment? = payment
 
     @OneToMany(mappedBy = "reservation", cascade = [CascadeType.ALL])
     private val seats: MutableList<Seat> = mutableListOf()
 
     init {
-        user.addReservation(this)
-        address.addReservation(this)
-        payment.addReservation(this)
+        user!!.addReservation(this)
+        address!!.addReservation(this)
+        payment!!.addReservation(this)
     }
 
     fun addSeat(seat: Seat) {

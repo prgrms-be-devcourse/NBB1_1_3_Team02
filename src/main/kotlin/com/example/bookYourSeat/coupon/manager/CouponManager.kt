@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional
 
 @Component
 @Transactional(readOnly = true)
-class CouponManager(
+open class CouponManager(
     private val couponRepository: CouponRepository
 ) {
 
     @Transactional
-    fun save(coupon: Coupon): Coupon {
+    open fun save(coupon: Coupon): Coupon {
         return couponRepository.save(coupon)
     }
 
@@ -23,7 +23,7 @@ class CouponManager(
     }
 
     @Transactional
-    fun saveAndFlush(coupon: Coupon) {
+    open fun saveAndFlush(coupon: Coupon) {
         couponRepository.saveAndFlush(coupon)
     }
 }

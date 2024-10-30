@@ -1,6 +1,6 @@
-package com.example.book_your_seat.concert_kotlin.repository
+package com.example.bookYourSeat.concert.repository
 
-import com.example.book_your_seat.concert_kotlin.domain.Concert
+import com.example.bookYourSeat.concert.domain.Concert
 import org.springframework.stereotype.Repository
 
 @Repository

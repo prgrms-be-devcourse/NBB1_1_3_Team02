@@ -12,9 +12,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer
 import java.time.Duration
 
 @Configuration
-class CacheConfig {
+open class CacheConfig {
     @Bean
-    fun cacheManager(factory: RedisConnectionFactory?): CacheManager {
+    open fun cacheManager(factory: RedisConnectionFactory?): CacheManager {
         val redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer()))
             .serializeValuesWith(

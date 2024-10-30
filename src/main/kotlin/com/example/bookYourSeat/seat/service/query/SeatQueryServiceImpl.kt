@@ -1,22 +1,22 @@
 package com.example.book_your_seat.seat.service.query
 
-import com.example.book_your_seat.concert.domain.Concert
-import com.example.book_your_seat.seat.domain.Seat
+import Seat
+import com.example.bookYourSeat.common.constants.Constants.INVALID_CONCERT
+import com.example.bookYourSeat.concert.domain.Concert
+import com.example.bookYourSeat.concert.repository.ConcertRepository
 import com.example.book_your_seat.seat.repository.SeatRepository
-import com.example.book_your_seat.concert.repository.ConcertRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
-class SeatQueryServiceImpl(
+open class SeatQueryServiceImpl(
     private val seatRepository: SeatRepository,
     private val concertRepository: ConcertRepository
 ) : SeatQueryService {
 
     override fun findAllSeats(concertId: Long): List<Seat> {
-        val concert = concertRepository.findById(concertId)
-            .orElseThrow { IllegalArgumentException(INVALID_CONCERT) }
+        val concert = concertRepository.findById(concertId).get()
 
         validateConcertDate(concert)
         return seatRepository.findByConcertId(concertId)
@@ -29,7 +29,7 @@ class SeatQueryServiceImpl(
 
     override fun getSeatPrice(seatIds: List<Long>): Int {
         val seats = seatRepository.findAllById(seatIds)
-        val concertPrice = seats.first().concert.price
+        val concertPrice = seats.first().concert!!.price
 
         return seats.sumOf { seat -> seat.zone.applyZonePrice(concertPrice) }
     }

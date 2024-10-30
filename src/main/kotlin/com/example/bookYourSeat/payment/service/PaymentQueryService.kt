@@ -1,10 +1,10 @@
 package com.example.bookYourSeat.payment.service
 
 
+import Seat
 import com.example.bookYourSeat.payment.domain.Payment
-import com.example.book_your_seat.seat.domain.Seat
-import com.example.book_your_seat.user.domain.Address
-import com.example.book_your_seat.user.domain.User
+import com.example.bookYourSeat.user.domain.Address
+import com.example.bookYourSeat.user.domain.User
 import java.math.BigDecimal
 import java.util.*
 

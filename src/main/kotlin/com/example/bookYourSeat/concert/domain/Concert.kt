@@ -1,10 +1,9 @@
-package com.example.book_your_seat.concert_kotlin.domain
+package com.example.bookYourSeat.concert.domain
 
-import com.example.book_your_seat.common.entity.BaseEntity
-import com.example.book_your_seat.concert.ConcertConst
+import Seat
+import com.example.bookYourSeat.common.entity.BaseEntity
+import com.example.bookYourSeat.review.domain.Review
 import com.example.book_your_seat.concert_kotlin.ConcertConst
-import com.example.book_your_seat.review.domain.Review
-import com.example.book_your_seat.seat.domain.Seat
 import jakarta.persistence.*
 import java.time.LocalDate
 import java.time.LocalDateTime

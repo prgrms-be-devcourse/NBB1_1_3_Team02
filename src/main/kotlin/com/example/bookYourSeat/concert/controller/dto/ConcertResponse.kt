@@ -1,8 +1,8 @@
-package com.example.book_your_seat.concert_kotlin.controller.dto
+package com.example.bookYourSeat.concert.controller.dto
 
-import com.example.book_your_seat.concert_kotlin.domain.Concert
-import com.example.book_your_seat.review.domain.Review
-import com.example.book_your_seat.seat.domain.Seat
+import Seat
+import com.example.bookYourSeat.concert.domain.Concert
+import com.example.bookYourSeat.review.domain.Review
 import java.time.LocalDate
 import java.time.LocalDateTime
 

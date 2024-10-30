@@ -12,7 +12,6 @@ import org.springframework.web.client.HttpStatusCodeException
 import java.util.*
 
 @Service
-
 class TossApiService(
     private val tossOpenFeign: TossOpenFeign,
     private val objectMapper: ObjectMapper

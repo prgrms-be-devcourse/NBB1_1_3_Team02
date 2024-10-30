@@ -1,10 +1,10 @@
-package com.example.book_your_seat.concert_kotlin.service
+package com.example.bookYourSeat.concert.service
 
 import com.example.book_your_seat.concert_kotlin.ConcertConst
-import com.example.book_your_seat.concert_kotlin.controller.dto.ConcertListResponse
-import com.example.book_your_seat.concert_kotlin.controller.dto.ConcertResponse
+import com.example.bookYourSeat.concert.controller.dto.ConcertListResponse
+import com.example.bookYourSeat.concert.controller.dto.ConcertResponse
 import com.example.book_your_seat.concert_kotlin.controller.dto.ResultRedisConcert
-import com.example.book_your_seat.concert_kotlin.repository.ConcertRepository
+import com.example.bookYourSeat.concert.repository.ConcertRepository
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

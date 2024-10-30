@@ -1,8 +1,8 @@
 package com.example.book_your_seat.seat.service.command
 
-import com.example.book_your_seat.reservation.domain.Reservation
+import Seat
+import com.example.bookYourSeat.reservation.domain.Reservation
 import com.example.book_your_seat.seat.controller.dto.SelectSeatRequest
-import com.example.book_your_seat.seat.domain.Seat
 
 interface SeatCommandService {
     fun selectSeat(request: SelectSeatRequest): List<Seat>

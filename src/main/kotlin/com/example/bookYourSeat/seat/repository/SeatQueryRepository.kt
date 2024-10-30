@@ -1,6 +1,6 @@
 package com.example.book_your_seat.seat.repository
 
-import com.example.book_your_seat.seat.domain.Seat
+import Seat
 import org.springframework.stereotype.Repository
 
 @Repository

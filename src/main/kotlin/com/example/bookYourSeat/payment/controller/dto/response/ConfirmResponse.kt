@@ -1,6 +1,6 @@
 package com.example.bookYourSeat.payment.controller.dto.response
 
-import com.example.book_your_seat.reservation.domain.ReservationStatus
+import com.example.bookYourSeat.reservation.domain.ReservationStatus
 
 data class ConfirmResponse(
     val userId: Long,

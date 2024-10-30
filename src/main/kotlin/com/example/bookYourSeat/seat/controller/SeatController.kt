@@ -1,12 +1,12 @@
 package com.example.book_your_seat.seat.controller
 
-import com.example.book_your_seat.config.security.auth.LoginUser
+import com.example.bookYourSeat.config.security.auth.LoginUser
+import com.example.bookYourSeat.user.domain.User
 import com.example.book_your_seat.seat.controller.dto.SelectSeatRequest
 import com.example.book_your_seat.seat.controller.dto.SelectSeatResponse
 import com.example.book_your_seat.seat.controller.dto.SeatResponse
-import com.example.book_your_seat.seat.facade.SeatFacade
+import com.example.book_your_seat.seat.service.facade.SeatFacade
 import jakarta.validation.Valid
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -27,7 +27,7 @@ class SeatController(private val seatFacade: SeatFacade) {
         @LoginUser user: User,
         @RequestBody @Valid selectSeatRequest: SelectSeatRequest
     ): ResponseEntity<SelectSeatResponse> {
-        val selectSeatResponse: SelectSeatResponse = seatFacade.selectSeat(selectSeatRequest, user.getId())
+        val selectSeatResponse: SelectSeatResponse = seatFacade.selectSeat(selectSeatRequest, user.id!!)
         return ResponseEntity.ok(selectSeatResponse)
     }
 }

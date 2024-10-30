@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull
 
 
 data class FinalPriceRequest(
-    val seatIds: @NotNull(message = ENTER_ORDER_ID) MutableList<Long>?,
+    val seatIds: @NotNull(message = ENTER_ORDER_ID) MutableList<Long>,
 
     val userCouponId: Long
 )

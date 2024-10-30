@@ -1,7 +1,7 @@
-package com.example.book_your_seat.concert_kotlin.repository
+package com.example.bookYourSeat.concert.repository
 
 import com.example.book_your_seat.concert_kotlin.ConcertConst
-import com.example.book_your_seat.concert_kotlin.domain.Concert
+import com.example.bookYourSeat.concert.domain.Concert
 import org.springframework.jdbc.core.BatchPreparedStatementSetter
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.support.GeneratedKeyHolder

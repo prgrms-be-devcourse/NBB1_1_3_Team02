@@ -1,5 +1,9 @@
 package com.example.bookYourSeat.queue.util
 
+import com.example.bookYourSeat.common.util.JwtConst.EMPTY_JWT
+import com.example.bookYourSeat.common.util.JwtConst.EXPIRED_JWT
+import com.example.bookYourSeat.common.util.JwtConst.INVALID_JWT
+import com.example.bookYourSeat.common.util.JwtConst.UNSUPPORTED_JWT
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.MalformedJwtException
@@ -16,15 +20,9 @@ import javax.crypto.spec.SecretKeySpec
 @Component
 class QueueJwtUtil internal constructor(
     @Value("\${jwt.secret}") secretKey: String,
-    @Value("\${jwt.queue_expiration_time}") expirationTime: Int
+    @Value("\${jwt.queue_expiration_time}") private val expirationTime: Int
 ) {
-    private val secretKey: SecretKey
-    private val expirationTime: Int
-
-    init {
-        this.secretKey = SecretKeySpec(secretKey.toByteArray(StandardCharsets.UTF_8), SIGNATURE_ALGORITHM)
-        this.expirationTime = expirationTime
-    }
+    private val secretKey: SecretKey = SecretKeySpec(secretKey.toByteArray(StandardCharsets.UTF_8), SIGNATURE_ALGORITHM)
 
     fun createJwt(userId: Long): String {
         val now = Instant.now()
@@ -60,13 +58,13 @@ class QueueJwtUtil internal constructor(
             .verifyWith(secretKey)
             .build()
             .parseSignedClaims(token)
-            .getPayload()
-            .get<String>("userId", String::class.java)
+            .payload
+            .get("userId", String::class.java)
 
         return userId.toLong()
     }
 
     companion object {
-        private val SIGNATURE_ALGORITHM: String = Jwts.SIG.HS256.key().build().getAlgorithm()
+        private val SIGNATURE_ALGORITHM: String = Jwts.SIG.HS256.key().build().algorithm
     }
 }

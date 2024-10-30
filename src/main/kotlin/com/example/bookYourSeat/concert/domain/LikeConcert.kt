@@ -1,6 +1,6 @@
-package com.example.book_your_seat.concert_kotlin.domain
+package com.example.bookYourSeat.concert.domain
 
-import com.example.book_your_seat.user.domain.User
+import com.example.bookYourSeat.user.domain.User
 import jakarta.persistence.*
 import lombok.AccessLevel
 import lombok.Getter
@@ -10,18 +10,18 @@ import lombok.NoArgsConstructor
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class LikeConcert(
-    @field:JoinColumn(name = "user_id") @field:ManyToOne(fetch = FetchType.LAZY) private val user: User,
-    @field:JoinColumn(
-        name = "concert_id"
-    ) @field:ManyToOne(fetch = FetchType.LAZY) private val concert: Concert
-) {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "like_concert_id")
-    private var id: Long? = null
+    private var id: Long = 0L,
 
-    init {
-        user.addLikeConcert(this)
-        concert.addLikeConcert(this)
-    }
+    @JoinColumn(name = "user_id") @field:ManyToOne(fetch = FetchType.LAZY)
+    private val user: User? = null,
+
+    @JoinColumn(name = "concert_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private val concert: Concert? = null
+) {
+
 }

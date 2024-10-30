@@ -6,14 +6,14 @@ import com.example.bookYourSeat.coupon.controller.dto.UserCouponIdResponse
 import com.example.bookYourSeat.coupon.domain.UserCoupon
 import com.example.bookYourSeat.coupon.manager.CouponManager
 import com.example.bookYourSeat.coupon.manager.UserCouponManager
-import com.example.bookYourSeat.user.service.UserQueryService
+import com.example.bookYourSeat.user.service.query.UserQueryService
 import com.example.book_your_seat.coupon.controller.dto.CouponCreateRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class CouponCommandFacade(
+open class CouponCommandFacade(
     private val userQueryService: UserQueryService,
     private val couponManager: CouponManager,
     private val userCouponManager: UserCouponManager

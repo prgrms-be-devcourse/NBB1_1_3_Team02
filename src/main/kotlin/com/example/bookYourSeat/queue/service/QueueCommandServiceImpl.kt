@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class QueueCommandServiceImpl(
     private val queueRedisRepository: QueueRedisRepository,
-    val queueJwtUtil: QueueJwtUtil
+    private val queueJwtUtil: QueueJwtUtil
 ) : QueueCommandService {
 
     /*

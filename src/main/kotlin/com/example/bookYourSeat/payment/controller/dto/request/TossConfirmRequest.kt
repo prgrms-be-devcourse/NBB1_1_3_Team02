@@ -3,7 +3,7 @@ package com.example.bookYourSeat.payment.controller.dto.request
 import com.example.bookYourSeat.payment.PaymentConst.ENTER_AMOUNT
 import com.example.bookYourSeat.payment.PaymentConst.ENTER_ORDER_ID
 import com.example.bookYourSeat.payment.PaymentConst.ENTER_PAYMENTKEY
-import com.example.book_your_seat.reservation.contorller.dto.PaymentRequest
+import com.example.bookYourSeat.reservation.contorller.dto.PaymentRequest
 import jakarta.validation.constraints.NotNull
 
 
@@ -15,9 +15,9 @@ data class TossConfirmRequest(
     companion object {
         fun from(request: PaymentRequest): TossConfirmRequest {
             return TossConfirmRequest(
-                request.paymentKey(),
-                request.orderId(),
-                request.amount()
+                request.paymentKey,
+                request.orderId,
+                request.amount
             )
         }
     }

@@ -1,8 +1,8 @@
 package com.example.book_your_seat.seat.service.command
 
-import com.example.book_your_seat.reservation.domain.Reservation
+import Seat
+import com.example.bookYourSeat.reservation.domain.Reservation
 import com.example.book_your_seat.seat.controller.dto.SelectSeatRequest
-import com.example.book_your_seat.seat.domain.Seat
 import com.example.book_your_seat.seat.repository.SeatRepository
 import com.example.book_your_seat.seat.SeatConst
 import org.slf4j.LoggerFactory
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class SeatCommandServiceImpl(
+open class SeatCommandServiceImpl(
     private val seatRepository: SeatRepository
 ) : SeatCommandService {
 

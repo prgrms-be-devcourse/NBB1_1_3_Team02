@@ -12,7 +12,7 @@ data class CouponDetailResponse(
         fun fromCoupon(coupon: Coupon): CouponDetailResponse {
             return CouponDetailResponse(
                 discountRate = coupon.discountRate.stringForm,
-                issuedAt = coupon.createdAt.toLocalDate(),
+                issuedAt = coupon.createdAt?.toLocalDate() ?: LocalDate.now(),
                 expirationDate = coupon.expirationDate
             )
         }

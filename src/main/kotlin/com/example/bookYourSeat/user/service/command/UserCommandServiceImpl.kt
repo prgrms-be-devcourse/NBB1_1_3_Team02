@@ -6,8 +6,9 @@ import com.example.bookYourSeat.user.controller.dto.TokenResponse
 import com.example.bookYourSeat.user.controller.dto.UserResponse
 import com.example.bookYourSeat.user.domain.User
 import com.example.bookYourSeat.user.repository.UserRepository
-import com.example.book_your_seat.config.security.auth.CustomUserDetails
-import com.example.book_your_seat.config.security.jwt.SecurityJwtUtil
+import com.example.bookYourSeat.config.security.auth.CustomUserDetails
+import com.example.bookYourSeat.config.security.jwt.SecurityJwtUtil
+import com.example.bookYourSeat.user.UserConst.INVALID_LOGIN_REQUEST
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.core.Authentication
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.lang.IllegalArgumentException
 
 @Service
-class UserCommandServiceImpl(
+open class UserCommandServiceImpl(
     private val userRepository: UserRepository,
     private val securityJwtUtil: SecurityJwtUtil,
     private val bCryptPasswordEncoder: BCryptPasswordEncoder,

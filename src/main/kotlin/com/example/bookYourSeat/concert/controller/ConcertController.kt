@@ -1,8 +1,8 @@
-package com.example.book_your_seat.concert_kotlin.controller
+package com.example.bookYourSeat.concert.controller
 
-import com.example.book_your_seat.concert_kotlin.controller.dto.ConcertResponse
+import com.example.bookYourSeat.concert.controller.dto.ConcertResponse
 import com.example.book_your_seat.concert_kotlin.controller.dto.ResultRedisConcert
-import com.example.book_your_seat.concert_kotlin.service.ConcertQueryService
+import com.example.bookYourSeat.concert.service.ConcertQueryService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

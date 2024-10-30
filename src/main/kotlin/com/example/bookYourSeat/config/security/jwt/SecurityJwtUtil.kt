@@ -1,9 +1,12 @@
 package com.example.bookYourSeat.config.security.jwt
 
+import com.example.bookYourSeat.common.util.JwtConst
 import com.example.bookYourSeat.config.security.auth.CustomUserDetailsService
+import com.example.bookYourSeat.user.domain.User
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.MalformedJwtException
+import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.UnsupportedJwtException
 import io.jsonwebtoken.security.SignatureException
 import org.slf4j.LoggerFactory
@@ -46,15 +49,15 @@ class SecurityJwtUtil(
             Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token)
             true
         } catch (e: MalformedJwtException) {
-            throw IllegalStateException(INVALID_JWT)
+            throw IllegalStateException(JwtConst.INVALID_JWT)
         } catch (e: ExpiredJwtException) {
-            throw IllegalStateException(EXPIRED_JWT)
+            throw IllegalStateException(JwtConst.EXPIRED_JWT)
         } catch (e: UnsupportedJwtException) {
-            throw IllegalStateException(UNSUPPORTED_JWT)
+            throw IllegalStateException(JwtConst.UNSUPPORTED_JWT)
         } catch (e: SignatureException) {
-            throw IllegalStateException(INVALID_SIGNATURE)
+            throw IllegalStateException("JwtConst.INVALID_SIGNATURE")
         } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException(EMPTY_JWT)
+            throw IllegalArgumentException(JwtConst.EMPTY_JWT)
         }
     }
 
@@ -75,7 +78,7 @@ class SecurityJwtUtil(
     }
 
     fun getAuthentication(token: String): Authentication {
-        val username = getEmailByToken(token)
+        val username = getEmailByToken(token) ?: ""
         val role = getRoleFromToken(token)
         val authority = SimpleGrantedAuthority(role)
         val userDetails: UserDetails = customUserDetailsService.loadUserByUsername(username)
@@ -84,7 +87,7 @@ class SecurityJwtUtil(
     }
 
     companion object {
-        private const val SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256.jcaName
+        private const val SIGNATURE_ALGORITHM = "HS256"
         private val log = LoggerFactory.getLogger(SecurityJwtUtil::class.java)
     }
 }

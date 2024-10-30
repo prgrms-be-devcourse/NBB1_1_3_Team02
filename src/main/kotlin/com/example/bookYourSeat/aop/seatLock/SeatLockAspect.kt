@@ -1,7 +1,7 @@
 package com.example.bookYourSeat.aop.seatLock
 
-import com.example.bookYourSeat.seat.controller.dto.SelectSeatRequest
-import com.example.bookYourSeat.seat.SeatConst.REDISSON_LOCK_KEY
+import com.example.book_your_seat.seat.SeatConst.REDISSON_LOCK_KEY
+import com.example.book_your_seat.seat.controller.dto.SelectSeatRequest
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -18,10 +18,10 @@ class SeatLockAspect(
     private val aopForTransaction: AopForTransaction
 ) {
 
-    @Around("@annotation(com.example.book_your_seat.aop.seatLock.SeatLock) && args(request, ..)")
+    @Around("@annotation(com.example.bookYourSeat.aop.seatLock.SeatLock) && args(request, ..)")
     fun lock(joinPoint: ProceedingJoinPoint, request: SelectSeatRequest): Any? {
         // 좌석 ID를 정렬하여 락 키를 생성
-        val lockKeys = request.seatIds()
+        val lockKeys = request.seatIds
             .map { seatId -> REDISSON_LOCK_KEY + seatId }
             .sorted()
             .toTypedArray()

@@ -1,7 +1,7 @@
-package com.example.book_your_seat.concert_kotlin.controller.dto
+package com.example.bookYourSeat.concert.controller.dto
 
 import com.example.book_your_seat.concert_kotlin.ConcertConst
-import com.example.book_your_seat.concert_kotlin.domain.Concert
+import com.example.bookYourSeat.concert.domain.Concert
 import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
@@ -25,14 +25,16 @@ data class AddConcertRequest(
     @field:Min(value = 0, message = ConcertConst.INVALID_CONCERT_START_HOUR)
     @field:Max(value = 24, message = ConcertConst.INVALID_CONCERT_START_HOUR)
     val startHour: Int
-)
-
-fun AddConcertRequest.toConcert(): Concert {
-    return Concert(
-        title = this.title,
-        startDate = this.startDate,
-        endDate = this.endDate,
-        price = this.price,
-        startHour = this.startHour
-    )
+) {
+    companion object {
+        fun AddConcertRequest.toConcert(): Concert {
+            return Concert(
+                title = this.title,
+                startDate = this.startDate,
+                endDate = this.endDate,
+                price = this.price,
+                startHour = this.startHour
+            )
+        }
+    }
 }

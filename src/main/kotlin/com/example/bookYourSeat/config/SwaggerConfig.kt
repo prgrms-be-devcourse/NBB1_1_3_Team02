@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class SwaggerConfig {
+open class SwaggerConfig {
     @Bean
-    fun openAPI(): OpenAPI {
+    open fun openAPI(): OpenAPI {
         return OpenAPI()
             .info(
                 Info()
@@ -21,7 +21,7 @@ class SwaggerConfig {
 
     //UserController 설정
     @Bean
-    fun bookYourSeatApi(): GroupedOpenApi {
+    open fun bookYourSeatApi(): GroupedOpenApi {
         return GroupedOpenApi.builder()
             .group("user API")
             .pathsToMatch("/api/v1/users/**")

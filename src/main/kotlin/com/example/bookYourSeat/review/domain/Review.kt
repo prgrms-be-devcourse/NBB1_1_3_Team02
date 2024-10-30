@@ -1,13 +1,12 @@
-package com.example.book_your_seat.review.domain
+package com.example.bookYourSeat.review.domain
 
-import com.example.book_your_seat.concert.domain.Concert
-import com.example.book_your_seat.user.domain.User
+import com.example.bookYourSeat.concert.domain.Concert
+import com.example.bookYourSeat.user.domain.User
 import jakarta.persistence.*
 import lombok.AccessLevel
 import lombok.NoArgsConstructor
 
 @Entity
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class Review(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +18,15 @@ class Review(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User,
+    var user: User? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
-    var concert: Concert
+    var concert: Concert? = null,
 ) {
+    constructor() : this(null, "", 0)
     init {
-        user.addReview(this)
-        concert.addReview(this)
+        user!!.addReview(this)
+        concert!!.addReview(this)
     }
 }

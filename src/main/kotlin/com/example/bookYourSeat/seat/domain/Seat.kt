@@ -1,15 +1,19 @@
-import com.example.book_your_seat.concert.domain.Concert
+import com.example.bookYourSeat.concert.domain.Concert
+import com.example.bookYourSeat.reservation.domain.Reservation
+import com.example.book_your_seat.seat.domain.Zone
 import jakarta.persistence.*
 
 @Entity
 class Seat(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
-    val concert: Concert,
+    val concert: Concert? = null,
 
     @Column(name = "seat_number", nullable = false)
     val seatNumber: Int
 ) {
+    constructor() : this(null, 0)
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
@@ -28,7 +32,7 @@ class Seat(
         private set
 
     init {
-        concert.addSeat(this)
+        concert!!.addSeat(this)
     }
 
     fun selectSeat() {

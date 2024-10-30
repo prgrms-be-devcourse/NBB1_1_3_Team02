@@ -1,15 +1,16 @@
 package com.example.book_your_seat.seat.service.facade
 
-import com.example.book_your_seat.queue.QueueConst.NOT_IN_PROCESSING_QUEUE
-import com.example.book_your_seat.reservation.domain.Reservation
+import Seat
+import com.example.bookYourSeat.aop.seatLock.SeatLock
+import com.example.bookYourSeat.queue.QueueConst.NOT_IN_PROCESSING_QUEUE
+import com.example.bookYourSeat.queue.repository.QueueRedisRepository
+import com.example.bookYourSeat.reservation.domain.Reservation
 import com.example.book_your_seat.seat.controller.dto.SelectSeatRequest
 import com.example.book_your_seat.seat.controller.dto.SelectSeatResponse
 import com.example.book_your_seat.seat.controller.dto.SeatResponse
-import com.example.book_your_seat.seat.domain.Seat
 import com.example.book_your_seat.seat.service.command.SeatCommandService
 import com.example.book_your_seat.seat.service.query.SeatQueryService
-import com.example.book_your_seat.redis.SeatRedisService
-import com.example.book_your_seat.redis.QueueRedisRepository
+import com.example.book_your_seat.seat.service.redis.SeatRedisService
 import org.springframework.stereotype.Service
 
 @Service

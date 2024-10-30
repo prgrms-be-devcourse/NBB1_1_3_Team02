@@ -6,8 +6,8 @@ import com.example.bookYourSeat.user.controller.dto.JoinRequest
 import com.example.bookYourSeat.user.controller.dto.LoginRequest
 import com.example.bookYourSeat.user.domain.User
 import com.example.bookYourSeat.user.service.command.UserCommandService
-import com.example.book_your_seat.config.security.auth.LoginUser
-import com.example.book_your_seat.user.controller.dto.*
+import com.example.bookYourSeat.config.security.auth.LoginUser
+import com.example.bookYourSeat.user.controller.dto.*
 import com.example.bookYourSeat.user.service.facade.UserFacade
 import com.example.bookYourSeat.user.service.query.UserQueryService
 import jakarta.validation.Valid

@@ -1,5 +1,8 @@
 package com.example.bookYourSeat.config.security.auth
 
+import com.example.bookYourSeat.user.UserConst.INVALID_EMAIL
+import com.example.bookYourSeat.user.domain.User
+import com.example.bookYourSeat.user.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -14,7 +17,7 @@ class CustomUserDetailsService(
     override fun loadUserByUsername(username: String): UserDetails {
         //username이 email
         val user: User = userRepository.findByEmail(username)
-            .orElseThrow { UsernameNotFoundException(INVALID_EMAIL) }
+            ?: throw UsernameNotFoundException(INVALID_EMAIL)
 
         return CustomUserDetails(user)
     }

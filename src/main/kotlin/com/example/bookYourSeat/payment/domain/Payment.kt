@@ -1,6 +1,6 @@
 package com.example.bookYourSeat.payment.domain
 
-import com.example.book_your_seat.reservation.domain.Reservation
+import com.example.bookYourSeat.reservation.domain.Reservation
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -17,6 +17,8 @@ class Payment(
     @JoinColumn(name = "reservation_id")
     var reservation: Reservation? = null // 기본값을 null로 설정
 ) {
+    constructor() : this(0L, LocalDateTime.now(), "", PaymentStatus.FAILED)
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")

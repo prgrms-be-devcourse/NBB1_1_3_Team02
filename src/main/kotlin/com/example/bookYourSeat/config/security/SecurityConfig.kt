@@ -5,6 +5,7 @@ import com.example.bookYourSeat.config.security.exception.CustomAccessDeniedHand
 import com.example.bookYourSeat.config.security.exception.CustomAuthenticationEntryPoint
 import com.example.bookYourSeat.config.security.jwt.JwtAuthenticationFilter
 import com.example.bookYourSeat.config.security.jwt.SecurityJwtUtil
+import com.example.bookYourSeat.user.domain.UserRole
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -22,16 +23,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig(
+open class SecurityConfig(
     private val customUserDetailsService: CustomUserDetailsService,
     private val securityJwtUtil: SecurityJwtUtil
 ) {
 
     @Bean
-    fun bCryptPasswordEncoder(): BCryptPasswordEncoder = BCryptPasswordEncoder()
+    open fun bCryptPasswordEncoder(): BCryptPasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    open fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
@@ -46,13 +47,13 @@ class SecurityConfig(
                 it.authenticationEntryPoint(CustomAuthenticationEntryPoint())
                     .accessDeniedHandler(CustomAccessDeniedHandler())
             }
-            .addFilterBefore(JwtAuthenticationFilter(securityJwtUtil), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
 
     @Bean
-    fun authenticationManager(http: HttpSecurity, bCryptPasswordEncoder: BCryptPasswordEncoder): AuthenticationManager {
+    open fun authenticationManager(http: HttpSecurity, bCryptPasswordEncoder: BCryptPasswordEncoder): AuthenticationManager {
         val sharedObject = http.getSharedObject(AuthenticationManagerBuilder::class.java)
         sharedObject.userDetailsService(customUserDetailsService)
             .passwordEncoder(bCryptPasswordEncoder)

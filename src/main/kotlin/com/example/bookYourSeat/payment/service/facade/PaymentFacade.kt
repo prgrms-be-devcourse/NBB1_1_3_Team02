@@ -1,9 +1,9 @@
 package com.example.bookYourSeat.payment.service.facade
 
-import com.example.book_your_seat.payment.controller.dto.request.FinalPriceRequest
-import com.example.book_your_seat.payment.controller.dto.response.ConfirmResponse
-import com.example.book_your_seat.payment.controller.dto.response.FinalPriceResponse
-import com.example.book_your_seat.payment.service.dto.PaymentCommand
+import com.example.bookYourSeat.payment.controller.dto.request.FinalPriceRequest
+import com.example.bookYourSeat.payment.controller.dto.response.ConfirmResponse
+import com.example.bookYourSeat.payment.controller.dto.response.FinalPriceResponse
+import com.example.bookYourSeat.payment.service.dto.PaymentCommand
 import org.springframework.stereotype.Service
 
 @Service

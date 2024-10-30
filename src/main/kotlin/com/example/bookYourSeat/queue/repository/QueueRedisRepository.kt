@@ -14,8 +14,6 @@ class QueueRedisRepository(
     private val zSet: ZSetOperations<String, String>
 ) : Serializable {
 
-
-
     fun enqueueProcessingQueue(userId: Long, token: String) {
         val value = generateValue(userId, token)
         zSet.add(PROCESSING_QUEUE_KEY, value,

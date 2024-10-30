@@ -4,7 +4,7 @@ import com.example.bookYourSeat.coupon.CouponConst.PERCENT
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-enum class DiscountRate(private val value: Int) {
+enum class DiscountRate(val value: Int) {
     FIVE(5),
     TEN(10),
     FIFTEEN(15),

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class QueueQueryServiceImpl(
-    val queueRedisRepository: QueueRedisRepository
+    private val queueRedisRepository: QueueRedisRepository
 ) : QueueQueryService {
 
 

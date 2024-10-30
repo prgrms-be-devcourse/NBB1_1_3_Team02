@@ -1,7 +1,7 @@
-package com.example.book_your_seat.concert_kotlin.controller
+package com.example.bookYourSeat.concert.controller
 
-import com.example.book_your_seat.concert_kotlin.controller.dto.AddConcertRequest
-import com.example.book_your_seat.concert_kotlin.service.ConcertCommandService
+import com.example.bookYourSeat.concert.controller.dto.AddConcertRequest
+import com.example.bookYourSeat.concert.service.ConcertCommandService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

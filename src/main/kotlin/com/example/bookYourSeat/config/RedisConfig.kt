@@ -13,7 +13,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
 @EnableRedisRepositories
-class RedisConfig {
+open class RedisConfig {
     @Value("\${spring.redis.host}")
     private val host: String? = null
 
@@ -24,7 +24,7 @@ class RedisConfig {
     private val password: String? = null
 
     @Bean
-    fun redisConnectionFactory(): RedisConnectionFactory {
+    open fun redisConnectionFactory(): RedisConnectionFactory {
         val redisConfiguration = RedisStandaloneConfiguration()
         redisConfiguration.hostName = host!!
         redisConfiguration.port = port
@@ -33,7 +33,7 @@ class RedisConfig {
     }
 
     @Bean
-    fun redisTemplate(connectionFactory: RedisConnectionFactory?): RedisTemplate<String, Any> {
+    open fun redisTemplate(connectionFactory: RedisConnectionFactory?): RedisTemplate<String, Any> {
         val template = RedisTemplate<String, Any>()
         template.connectionFactory = connectionFactory
         template.keySerializer = StringRedisSerializer()
@@ -43,7 +43,7 @@ class RedisConfig {
     }
 
     @Bean
-    fun redisMessageListenerContainer(connectionFactory: RedisConnectionFactory?): RedisMessageListenerContainer {
+    open fun redisMessageListenerContainer(connectionFactory: RedisConnectionFactory?): RedisMessageListenerContainer {
         val container = RedisMessageListenerContainer()
         container.setConnectionFactory(connectionFactory!!)
         return container

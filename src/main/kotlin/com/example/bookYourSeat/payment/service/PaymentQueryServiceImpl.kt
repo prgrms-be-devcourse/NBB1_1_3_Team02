@@ -1,16 +1,19 @@
 package com.example.bookYourSeat.payment.service
 
+import Seat
+import com.example.bookYourSeat.common.constants.Constants.INVALID_CONCERT
 import com.example.bookYourSeat.payment.domain.Payment
 import com.example.bookYourSeat.payment.repository.PaymentRepository
-import com.example.book_your_seat.concert.repository.ConcertRepository
-import com.example.book_your_seat.coupon.domain.UserCoupon
-import com.example.book_your_seat.coupon.repository.UserCouponRepository
-import com.example.book_your_seat.seat.domain.Seat
+import com.example.bookYourSeat.concert.repository.ConcertRepository
+import com.example.bookYourSeat.coupon.domain.UserCoupon
+import com.example.bookYourSeat.coupon.repository.UserCouponRepository
+import com.example.bookYourSeat.reservation.ReservationConst.INVALID_USER
+import com.example.bookYourSeat.user.domain.Address
+import com.example.bookYourSeat.user.domain.User
+import com.example.bookYourSeat.user.repository.AddressRepository
+import com.example.bookYourSeat.user.repository.UserRepository
+import com.example.book_your_seat.seat.SeatConst.INVALID_ADDRESS
 import com.example.book_your_seat.seat.repository.SeatRepository
-import com.example.book_your_seat.user.domain.Address
-import com.example.book_your_seat.user.domain.User
-import com.example.book_your_seat.user.repository.AddressRepository
-import com.example.book_your_seat.user.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
@@ -19,7 +22,7 @@ import java.util.*
 
 @Transactional(readOnly = true)
 @Service
-class PaymentQueryServiceImpl(
+open class PaymentQueryServiceImpl(
     private val userRepository: UserRepository,
     private val addressRepository: AddressRepository,
     private val concertRepository: ConcertRepository,
@@ -30,7 +33,7 @@ class PaymentQueryServiceImpl(
 
     override fun getOriginalPrice(concertId: Long, quantity: Int): BigDecimal {
         return concertRepository.findById(concertId)
-            .map { concert -> concert.price * quantity } // getPrice() -> price로 수정
+            .map { concert -> concert!!.price * quantity } // getPrice() -> price로 수정
             .map { BigDecimal(it) } // BigDecimal 생성 시 인자를 사용
             .orElseThrow { IllegalArgumentException(INVALID_CONCERT) }
     }
@@ -42,8 +45,8 @@ class PaymentQueryServiceImpl(
 
         return userCouponRepository.findByIdAndIsUsed(userCouponId, false)
             .map(UserCoupon::coupon) // getCoupon() -> coupon으로 수정
-            .filter { coupon -> LocalDate.now().isBefore(coupon.expirationDate) } // getExpirationDate() -> expirationDate로 수정
-            .map { coupon -> coupon.discountRate } // getDiscountRate() -> discountRate로 수정
+            .filter { coupon -> LocalDate.now().isBefore(coupon!!.expirationDate) } // getExpirationDate() -> expirationDate로 수정
+            .map { coupon -> coupon!!.discountRate } // getDiscountRate() -> discountRate로 수정
             .map { discountRate -> discountRate.calculateDiscountedPrice(originalPrice) }
             .orElse(originalPrice)
     }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Component
 @Transactional(readOnly = true)
-class UserCouponManager(
+open class UserCouponManager(
     private val userCouponRepository: UserCouponRepository
 ) {
 
@@ -19,7 +19,7 @@ class UserCouponManager(
     }
 
     @Transactional
-    fun save(userCoupon: UserCoupon): UserCoupon {
+    open fun save(userCoupon: UserCoupon): UserCoupon {
         return userCouponRepository.save(userCoupon)
     }
 
@@ -29,7 +29,7 @@ class UserCouponManager(
     }
 
     @Transactional
-    fun updateUserCoupon(userCoupon: UserCoupon) {
+    open fun updateUserCoupon(userCoupon: UserCoupon) {
         userCoupon.setUsed()
         userCouponRepository.save(userCoupon)
     }

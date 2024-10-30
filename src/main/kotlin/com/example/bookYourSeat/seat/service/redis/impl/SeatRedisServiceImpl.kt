@@ -1,7 +1,7 @@
 package com.example.book_your_seat.seat.service.redis.impl
 
-import com.example.book_your_seat.reservation.controller.dto.PaymentRequest
-import com.example.book_your_seat.seat.domain.Seat
+import Seat
+import com.example.bookYourSeat.reservation.contorller.dto.PaymentRequest
 import com.example.book_your_seat.seat.service.redis.SeatRedisService
 import com.example.book_your_seat.seat.SeatConst.ACCEPTABLE_TIMEOUT
 import com.example.book_your_seat.seat.SeatConst.SEAT_SOLD
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.concurrent.TimeUnit
 
 @Component
-class SeatRedisServiceImpl(
+open class SeatRedisServiceImpl(
     private val redisTemplate: RedisTemplate<String, Any>
 ) : SeatRedisService {
 

@@ -10,19 +10,19 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
-class CouponQueryFacade(
+open class CouponQueryFacade(
     private val userCouponManager: UserCouponManager
 ) : CouponQueryService {
 
     override fun getCouponDetailById(userCouponId: Long): CouponDetailResponse {
         val userCoupon: UserCoupon = userCouponManager.findValidUserCoupon(userCouponId)
-        val coupon: Coupon = userCoupon.coupon
+        val coupon: Coupon = userCoupon.coupon ?: throw IllegalArgumentException("")
         return CouponDetailResponse.fromCoupon(coupon)
     }
 
     override fun getDiscountRate(userCouponId: Long): DiscountRate {
         return userCouponManager.findValidUserCoupon(userCouponId)
-            .coupon
+            .coupon!!
             .discountRate
     }
 }
