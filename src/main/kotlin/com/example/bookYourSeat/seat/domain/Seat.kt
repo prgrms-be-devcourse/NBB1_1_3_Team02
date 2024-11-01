@@ -5,31 +5,28 @@ import jakarta.persistence.*
 
 @Entity
 class Seat(
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seat_id")
+    var id: Concert = null,
+
+    @Column(name = "seat_number", nullable = false)
+    val seatNumber: Int = 0,
+
+    @Enumerated(EnumType.STRING)
+    val zone: Zone = Zone.setZone(seatNumber),
+
+    var isSold: Boolean = false,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id")
+    var reservation: Reservation? = null,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
     val concert: Concert? = null,
 
-    @Column(name = "seat_number", nullable = false)
-    val seatNumber: Int
-) {
-    constructor() : this(null, 0)
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seat_id")
-    var id: Long? = null
-        private set
-
-    @Enumerated(EnumType.STRING)
-    val zone: Zone = Zone.setZone(seatNumber)
-
-    var isSold: Boolean = false
-        private set
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservation_id")
-    var reservation: Reservation? = null
-        private set
+    ) {
 
     init {
         concert!!.addSeat(this)

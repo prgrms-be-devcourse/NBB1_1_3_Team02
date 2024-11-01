@@ -9,10 +9,20 @@ import jakarta.persistence.*
 @Entity
 class User(
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    val id: Long? = null,
+    var id: Long = 0L,
+
+    var nickname: String = "",
+
+    var username: String = "",
+
+    var email: String = "",
+
+    var password: String = "",
+
+    @Enumerated(EnumType.STRING)
+    var userRole: UserRole = UserRole.USER,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
     val addressList: MutableList<Address> = mutableListOf(),
@@ -26,15 +36,7 @@ class User(
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
     val reservations: MutableList<Reservation> = mutableListOf(),
 
-    var nickname: String = "",
-    var username: String = "",
-    var email: String = "",
-    var password: String = "",
-    @Enumerated(EnumType.STRING)
-    var userRole: UserRole = UserRole.USER
 ) : BaseEntity() {
-
-    constructor(): this(null)
 
     fun setAddress(address: Address) {
         this.addressList.add(address)

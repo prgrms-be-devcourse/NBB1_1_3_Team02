@@ -6,24 +6,21 @@ import java.time.LocalDate
 
 @Entity
 class Coupon(
-    var amount: Int,
 
-    @Enumerated(EnumType.STRING)
-    val discountRate: DiscountRate,
-
-    val expirationDate: LocalDate
-) : BaseEntity() {
-    constructor() : this(0, DiscountRate.TEN, LocalDate.now())
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "coupon_id")
-    var id: Long? = null
-        protected set
+    var id: Long? = null,
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val userCoupons: MutableList<UserCoupon> = mutableListOf()
+    var userCoupons: MutableList<UserCoupon> = mutableListOf(),
 
+    var amount: Int = 0,
+
+    @Enumerated(EnumType.STRING)
+    val discountRate: DiscountRate = DiscountRate.FIVE,
+
+    val expirationDate: LocalDate = LocalDate.now(),
+) : BaseEntity() {
 
     fun addUserCoupon(userCoupon: UserCoupon) {
         userCoupons.add(userCoupon)

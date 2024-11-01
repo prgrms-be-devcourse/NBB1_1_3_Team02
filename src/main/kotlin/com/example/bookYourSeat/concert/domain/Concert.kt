@@ -10,34 +10,32 @@ import java.time.LocalDateTime
 
 @Entity
 class Concert(
-    val title: String,
-    val startDate: LocalDate,
-    val endDate: LocalDate,
-    val price: Int,
-    val startHour: Int
-) : BaseEntity() {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "concert_id")
-    var id: Long? = null
-        protected set
+    var id: Long? = null,
 
-    val totalStock: Int = ConcertConst.TOTAL_STOCK
+    val title: String = "",
+    val startDate: LocalDate = LocalDate.now(),
+    val endDate: LocalDate = LocalDate.now(),
+    val price: Int = 0,
+    val startHour: Int = 0,
 
-    val reservationStartAt: LocalDateTime = setReservationTime(startDate)
+    val totalStock: Int = ConcertConst.TOTAL_STOCK,
+
+    val reservationStartAt: LocalDateTime = setReservationTime(startDate),
 
     @OneToMany(mappedBy = "concert", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val likeConcerts: MutableList<LikeConcert> = mutableListOf()
+    val likeConcerts: MutableList<LikeConcert> = mutableListOf(),
 
     @OneToMany(mappedBy = "concert", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val reviews: MutableList<Review> = mutableListOf()
+    val reviews: MutableList<Review> = mutableListOf(),
 
     @OneToMany(mappedBy = "concert", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val seats: MutableList<Seat> = mutableListOf()
+    var seats: MutableList<Seat> = mutableListOf(),
 
-    // JPA는 기본 생성자가 필요합니다.
-    protected constructor() : this("", LocalDate.now(), LocalDate.now(), 0, 0)
+
+) : BaseEntity() {
 
     init {
         initializeSeats()
@@ -71,4 +69,15 @@ class Concert(
     fun addSeat(seat: Seat) {
         seats.add(seat)
     }
+}
+
+fun setReservationTime(startDate: LocalDate): LocalDateTime {
+    return LocalDateTime.of(
+        startDate.year,
+        startDate.month,
+        startDate.dayOfMonth,
+        ConcertConst.RESERVATION_START_HOUR,
+        ConcertConst.RESERVATION_START_MINUTE,
+        ConcertConst.RESERVATION_START_SECOND
+    ).minusWeeks(1)
 }

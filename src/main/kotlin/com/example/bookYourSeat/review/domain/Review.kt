@@ -13,8 +13,8 @@ class Review(
     @Column(name = "review_id")
     val id: Long? = null,
 
-    var content: String,
-    var starCount: Int,
+    var content: String = "empty",
+    var starCount: Int = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -24,7 +24,6 @@ class Review(
     @JoinColumn(name = "concert_id")
     var concert: Concert? = null,
 ) {
-    constructor() : this(null, "", 0)
     init {
         user!!.addReview(this)
         concert!!.addReview(this)
