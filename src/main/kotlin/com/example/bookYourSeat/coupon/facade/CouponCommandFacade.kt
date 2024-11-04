@@ -22,7 +22,7 @@ open class CouponCommandFacade(
     override fun createCoupon(couponCreateRequest: CouponCreateRequest): CouponResponse {
         val coupon = couponCreateRequest.toCoupon()
         val savedCoupon = couponManager.save(coupon)
-        return CouponResponse(savedCoupon.id!!)
+        return CouponResponse(savedCoupon.id)
     }
 
     @DistributedLock(key = "coupon_lock")
@@ -35,8 +35,8 @@ open class CouponCommandFacade(
         coupon.issue()
         couponManager.saveAndFlush(coupon)
 
-        val userCoupon = userCouponManager.save(UserCoupon(user, coupon))
-        return UserCouponIdResponse(userCoupon.id!!)
+        val userCoupon = userCouponManager.save(UserCoupon(user = user))
+        return UserCouponIdResponse(userCoupon.id)
     }
 
     override fun useUserCoupon(userCouponId: Long) {

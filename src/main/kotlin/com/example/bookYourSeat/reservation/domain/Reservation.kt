@@ -12,7 +12,7 @@ class Reservation(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
-    var id: Long? = null,
+    var id: Long = 0L,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

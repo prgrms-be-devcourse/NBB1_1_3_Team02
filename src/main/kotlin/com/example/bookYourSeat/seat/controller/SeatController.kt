@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/seats")
-class SeatController(private val seatFacade: SeatFacade) {
+class SeatController(
+    private val seatFacade: SeatFacade
+) {
 
     @GetMapping("/{concertId}")
     fun findAllSeats(
@@ -27,7 +29,7 @@ class SeatController(private val seatFacade: SeatFacade) {
         @LoginUser user: User,
         @RequestBody @Valid selectSeatRequest: SelectSeatRequest
     ): ResponseEntity<SelectSeatResponse> {
-        val selectSeatResponse: SelectSeatResponse = seatFacade.selectSeat(selectSeatRequest, user.id!!)
+        val selectSeatResponse: SelectSeatResponse = seatFacade.selectSeat(selectSeatRequest, user.id)
         return ResponseEntity.ok(selectSeatResponse)
     }
 }

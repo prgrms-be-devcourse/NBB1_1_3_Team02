@@ -9,7 +9,7 @@ class Coupon(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "coupon_id")
-    var id: Long? = null,
+    var id: Long = 0L,
 
     @OneToMany(mappedBy = "coupon", cascade = [CascadeType.ALL], orphanRemoval = true)
     var userCoupons: MutableList<UserCoupon> = mutableListOf(),

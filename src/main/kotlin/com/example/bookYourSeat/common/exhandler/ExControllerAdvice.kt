@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class ExControllerAdvice(private val slackFacade: SlackFacade) {
+class ExControllerAdvice(
+    private val slackFacade: SlackFacade
+) {
 
     private val log = LoggerFactory.getLogger(javaClass)
 

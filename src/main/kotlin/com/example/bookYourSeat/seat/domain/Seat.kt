@@ -8,7 +8,7 @@ class Seat(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
-    var id: Concert = null,
+    var id: Long = 0L,
 
     @Column(name = "seat_number", nullable = false)
     val seatNumber: Int = 0,

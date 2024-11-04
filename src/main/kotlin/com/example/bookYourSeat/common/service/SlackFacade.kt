@@ -7,21 +7,23 @@ import com.example.bookYourSeat.common.constants.Constants.EXCEPTION_URL
 import com.example.bookYourSeat.common.constants.Constants.TIME
 import com.example.bookYourSeat.common.entity.ErrorResult
 import com.example.bookYourSeat.common.entity.color.Color
-import com.example.bookYourSeat.concert.ConcertConst.CONCERT_NAME
-import com.example.bookYourSeat.concert.ConcertConst.CONCERT_TIME
 import com.example.bookYourSeat.payment.PaymentConst.AMOUNT_PAY
 import com.example.bookYourSeat.payment.PaymentConst.PAY_TIME
 import com.example.bookYourSeat.payment.controller.dto.response.ConfirmResponse
 import com.example.bookYourSeat.reservation.ReservationConst.RESERVATION_NUMBER
 import com.example.bookYourSeat.reservation.ReservationConst.RESERVATION_SEAT
 import com.example.bookYourSeat.reservation.ReservationConst.RESERVATION_STATE
+import com.example.book_your_seat.concert_kotlin.ConcertConst.CONCERT_NAME
+import com.example.book_your_seat.concert_kotlin.ConcertConst.CONCERT_TIME
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Service
-class SlackFacade(private val slackService: SlackService) {
+class SlackFacade(
+    private val slackService: SlackService
+) {
 
     fun sendSlackErrorMessage(errorResult: ErrorResult, request: HttpServletRequest) {
         val dataMap = LinkedHashMap<String, String>()

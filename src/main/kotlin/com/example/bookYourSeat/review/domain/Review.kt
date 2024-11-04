@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor
 class Review(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
-    val id: Long? = null,
+    val id: Long = 0L,
 
     var content: String = "empty",
     var starCount: Int = 0,

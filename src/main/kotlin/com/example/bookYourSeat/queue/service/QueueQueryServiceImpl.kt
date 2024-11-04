@@ -12,7 +12,6 @@ class QueueQueryServiceImpl(
     private val queueRedisRepository: QueueRedisRepository
 ) : QueueQueryService {
 
-
     /*
     유저의 현재 큐 상태 확인
      */

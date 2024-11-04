@@ -23,7 +23,7 @@ class Concert(
 
     val totalStock: Int = ConcertConst.TOTAL_STOCK,
 
-    val reservationStartAt: LocalDateTime = setReservationTime(startDate),
+    var reservationStartAt: LocalDateTime? = null,
 
     @OneToMany(mappedBy = "concert", cascade = [CascadeType.ALL], orphanRemoval = true)
     val likeConcerts: MutableList<LikeConcert> = mutableListOf(),
@@ -54,7 +54,7 @@ class Concert(
 
     private fun initializeSeats() {
         (1..totalStock).forEach { i ->
-            addSeat(Seat(this@Concert, i))
+            addSeat(Seat(seatNumber = i))
         }
     }
 
@@ -70,14 +70,14 @@ class Concert(
         seats.add(seat)
     }
 }
-
-fun setReservationTime(startDate: LocalDate): LocalDateTime {
-    return LocalDateTime.of(
-        startDate.year,
-        startDate.month,
-        startDate.dayOfMonth,
-        ConcertConst.RESERVATION_START_HOUR,
-        ConcertConst.RESERVATION_START_MINUTE,
-        ConcertConst.RESERVATION_START_SECOND
-    ).minusWeeks(1)
-}
+//
+//fun setReservationTime(startDate: LocalDate): LocalDateTime {
+//    return LocalDateTime.of(
+//        startDate.year,
+//        startDate.month,
+//        startDate.dayOfMonth,
+//        ConcertConst.RESERVATION_START_HOUR,
+//        ConcertConst.RESERVATION_START_MINUTE,
+//        ConcertConst.RESERVATION_START_SECOND
+//    ).minusWeeks(1)
+//}

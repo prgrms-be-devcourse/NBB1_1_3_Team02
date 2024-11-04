@@ -18,7 +18,7 @@ class QueueController(
     fun issueTokenAndEnqueue(@LoginUser user: User): ResponseEntity<TokenResponse> {
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(queueService.issueTokenAndEnqueue(user.id!!))
+            .body(queueService.issueTokenAndEnqueue(user.id))
     }
 
     @GetMapping
@@ -27,7 +27,7 @@ class QueueController(
         @RequestParam("token") token: String
     ): ResponseEntity<QueueResponse> {
         return ResponseEntity.ok()
-            .body(queueService.findQueueStatus(user.id!!, token))
+            .body(queueService.findQueueStatus(user.id, token))
     }
 
     @PostMapping("/wait/quit")
@@ -35,8 +35,8 @@ class QueueController(
         @LoginUser user: User,
         @RequestParam("token") token: String
     ): ResponseEntity<Void> {
-        queueService.dequeueWaitingQueue(user.id!!, token)
-        return ResponseEntity.ok<Void>(null)
+        queueService.dequeueWaitingQueue(user.id, token)
+        return ResponseEntity.ok(null)
     }
 
     @PostMapping("/process/quit")
@@ -44,7 +44,7 @@ class QueueController(
         @LoginUser user: User,
         @RequestParam("token") token: String
     ): ResponseEntity<Void> {
-        queueService.dequeueProcessingQueue(user.id!!, token)
-        return ResponseEntity.ok<Void>(null)
+        queueService.dequeueProcessingQueue(user.id, token)
+        return ResponseEntity.ok(null)
     }
 }
