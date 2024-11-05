@@ -27,7 +27,7 @@ class UserQueryServiceImpl(
         return user.addressList.stream()
             .map { address: Address ->
                 AddressResponse(
-                    address.postcode!!,
+                    address.postcode,
                     address.detail
                 )
             }.toList()

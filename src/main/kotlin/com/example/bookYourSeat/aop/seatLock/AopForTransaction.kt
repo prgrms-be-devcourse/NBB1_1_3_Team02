@@ -6,10 +6,10 @@ import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 
 @Component
-class AopForTransaction {
+open class AopForTransaction {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    fun proceed(joinPoint: ProceedingJoinPoint): Any? {
+    open fun proceed(joinPoint: ProceedingJoinPoint): Any? {
         return joinPoint.proceed()
     }
 }

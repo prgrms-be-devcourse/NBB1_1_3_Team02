@@ -4,7 +4,6 @@ import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Pointcut
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -22,7 +21,7 @@ class LogAspect(private val logTracer: LogTracer) {
         try {
             status = logTracer.begin(
                 " Method : " + getKeySignature(joinPoint),
-                Arrays.deepToString(joinPoint.args)
+                joinPoint.args.contentDeepToString()
             )
             return joinPoint.proceed()
         } catch (ex: Exception) {
@@ -39,9 +38,5 @@ class LogAspect(private val logTracer: LogTracer) {
         val length = split.size
         val arr = Arrays.copyOfRange(split, length - 3, length)
         return "${arr[1]}.${arr[2]}"
-    }
-
-    companion object {
-        private val logger = LoggerFactory.getLogger(LogAspect::class.java)
     }
 }

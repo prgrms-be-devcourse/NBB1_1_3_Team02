@@ -45,7 +45,7 @@ open class RedisConfig {
     @Bean
     open fun redisMessageListenerContainer(connectionFactory: RedisConnectionFactory?): RedisMessageListenerContainer {
         val container = RedisMessageListenerContainer()
-        container.setConnectionFactory(connectionFactory!!)
+        container.connectionFactory = connectionFactory!!
         return container
     }
 }

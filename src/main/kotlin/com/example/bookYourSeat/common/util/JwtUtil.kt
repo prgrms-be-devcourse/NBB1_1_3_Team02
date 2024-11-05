@@ -13,14 +13,11 @@ import java.nio.charset.StandardCharsets
 
 @Component
 abstract class JwtUtil(@Value("\${jwt.secret}") secretKey: String) {
-    protected val secretKey: SecretKey
+    private val secretKey: SecretKey =
+        SecretKeySpec(secretKey.toByteArray(StandardCharsets.UTF_8), SIGNATURE_ALGORITHM)
 
     companion object {
         private val SIGNATURE_ALGORITHM = Jwts.SIG.HS256.key().build().algorithm
-    }
-
-    init {
-        this.secretKey = SecretKeySpec(secretKey.toByteArray(StandardCharsets.UTF_8), SIGNATURE_ALGORITHM)
     }
 
     fun validateToken(token: String): Boolean {

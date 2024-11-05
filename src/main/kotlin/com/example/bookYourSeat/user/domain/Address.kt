@@ -6,30 +6,22 @@ import jakarta.persistence.*
 
 @Entity
 class Address(
-    postcode: String? = "",
-    detail: String? = "",
-    user: User? = null
-) : BaseEntity() {
-
-    constructor() : this(null) {
-
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    val id: Long? = null
+    val id: Long = 0L,
 
-    var postcode: String? = postcode
-        protected set
+    var postcode: String = "",
 
-    var detail: String = detail.toString()
-        protected set
+    detail: String = "",
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User? = user
-        protected set
+    var user: User? = null
+) : BaseEntity() {
+
+    var detail: String = detail.toString()
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")

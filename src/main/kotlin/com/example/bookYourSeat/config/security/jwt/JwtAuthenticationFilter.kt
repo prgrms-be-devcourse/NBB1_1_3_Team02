@@ -20,7 +20,6 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
     ) {
         val authorization = request.getHeader("Authorization")
 
-        //token 이 없으면 anonymous User
         if (authorization == null) {
             filterChain.doFilter(request, response)
             return
@@ -29,9 +28,7 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
         validateJwtAuthorizationType(authorization)
         val jwt = authorization.substring(TOKEN_TYPE.length)
 
-        //token 검증이 완료된 경우에만 authentication을 부여
         if (securityJwtUtil!!.validateToken(jwt)) {
-//            log.info("jwt :$jwt")
             val authentication = securityJwtUtil.getAuthentication(jwt)
             SecurityContextHolder.getContext().authentication = authentication
         }
